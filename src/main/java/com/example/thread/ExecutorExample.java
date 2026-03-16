@@ -1,4 +1,4 @@
-package com.eazybytes.java.multithreading;
+package com.example.thread;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
