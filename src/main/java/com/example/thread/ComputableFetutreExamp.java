@@ -1,4 +1,4 @@
-package com.eazybytes.java.multithreading;
+package com.example.thread;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
@@ -23,7 +23,7 @@ public class ComputableFetutreExamp {
 			return "ok";
 		});
 		
-		
+		//chaning 
 		CompletableFuture<String> c1=	CompletableFuture.supplyAsync(() -> {
 			System.out.println("Welcome1");
 			
@@ -36,6 +36,14 @@ public class ComputableFetutreExamp {
 				
 			}
 			return "ok1";
+		}).thenApply(res -> {
+			return res+" bye";
+		}).thenApply(res -> {
+			return res.toUpperCase();
+		}).exceptionally(ex -> {
+			
+			return "Handled exception: " + ex.getMessage();
+
 		});
 		
 		
@@ -64,9 +72,14 @@ String s1=null;
 			e.printStackTrace();
 		}
 		
-		CompletableFuture<Void> c2=CompletableFuture.allOf(c,c1);
+		//CompletableFuture<Void> c2=CompletableFuture.allOf(c,c1);
 		
-		c2.join();
+		 CompletableFuture<String> result = c.thenCombine(c1, (user, order) -> {
+	            return user + " + " + order;
+	        });
+
+
+		result.join();
 		
 		System.out.println("Main Method is done");
 		
